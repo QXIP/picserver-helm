@@ -1,5 +1,5 @@
 # Helm Chart example for picserver
-IMAGE
+![image](https://github.com/user-attachments/assets/b2e642d1-fe5a-4ec6-b159-99ca8025f9e3)
 
 ## Overview
 This Helm chart provides Kubernetes deployment configurations for Picserver.
