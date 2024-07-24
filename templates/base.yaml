@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "picserver.fullname" . }}-base
+  labels:
+    k8slens-edit-resource-version: v1
+  {{- include "picserver.labels" . | nindent 4 }}
+data:
+  HEPICAPP_SYSTEM_SETTINGS_LOG_DOWNLOAD_ENABLE: {{ .Values.base.hepicappSystemSettingsLogDownloadEnable
+    | quote }}
+  PICSERVER_CLICKHOUSE_MAX_TLS: {{ .Values.base.picserverClickhouseMaxTls | quote
+    }}
+  PICSERVER_CLICKHOUSE_MIN_TLS: {{ .Values.base.picserverClickhouseMinTls | quote
+    }}
+  PICSERVER_CLICKHOUSE_RECONNECT_ON_EXCEPTION: {{ .Values.base.picserverClickhouseReconnectOnException
+    | quote }}
+  PICSERVER_CLICKHOUSE_SETTINGS_DB_PARAM: {{ .Values.base.picserverClickhouseSettingsDbParam
+    | quote }}
+  PICSERVER_CLICKHOUSE_SETTINGS_MAX_TLS: {{ .Values.base.picserverClickhouseSettingsMaxTls
+    | quote }}
+  PICSERVER_CLICKHOUSE_SETTINGS_MIN_TLS: {{ .Values.base.picserverClickhouseSettingsMinTls
+    | quote }}
+  PICSERVER_CLICKHOUSE_SETTINGS_TCPKEEPALIVE: {{ .Values.base.picserverClickhouseSettingsTcpkeepalive
+    | quote }}
+  PICSERVER_CLICKHOUSE_TCPKEEPALIVE: {{ .Values.base.picserverClickhouseTcpkeepalive
+    | quote }}
+  PICSERVER_CLOUD_LICENSE: {{ .Values.base.picserverCloudLicense | quote }}
+  PICSERVER_INTERNALSTATS_CONCURRENT_CALLS: {{ .Values.base.picserverInternalstatsConcurrentCalls
+    | quote }}
+  PICSERVER_INTERNALSTATS_CONCURRENT_REGISTRATION: {{ .Values.base.picserverInternalstatsConcurrentRegistration
+    | quote }}
+  PICSERVER_INTERNALSTATS_ENABLE: {{ .Values.base.picserverInternalstatsEnable |
+    quote }}
+  PICSERVER_INTERNALSTATS_HEP_METRICS: {{ .Values.base.picserverInternalstatsHepMetrics
+    | quote }}
+  PICSERVER_INTERNALSTATS_INTERVAL: {{ .Values.base.picserverInternalstatsInterval
+    | quote }}
+  PICSERVER_MOS_EXTRACT_JSON_MOS: {{ .Values.base.picserverMosExtractJsonMos | quote
+    }}
+  PICSERVER_SERVER_CLI_HOST: {{ .Values.base.picserverServerCliHost | quote }}
+  PICSERVER_SERVER_HTTP_HOST: {{ .Values.base.picserverServerHttpHost | quote }}
+  PICSERVER_SERVER_TCP_PORT: {{ .Values.base.picserverServerTcpPort | quote }}
+  PICSERVER_SETTINGS_DISABLE_JSON_ERROR_PARSER: {{ .Values.base.picserverSettingsDisableJsonErrorParser
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM1_ENABLE: {{ .Values.base.picserverSettingsHeaderCustom1Enable
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM1_NAME: {{ .Values.base.picserverSettingsHeaderCustom1Name
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM2_ENABLE: {{ .Values.base.picserverSettingsHeaderCustom2Enable
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM2_NAME: {{ .Values.base.picserverSettingsHeaderCustom2Name
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM3_ENABLE: {{ .Values.base.picserverSettingsHeaderCustom3Enable
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM3_NAME: {{ .Values.base.picserverSettingsHeaderCustom3Name
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM4_ENABLE: {{ .Values.base.picserverSettingsHeaderCustom4Enable
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM4_NAME: {{ .Values.base.picserverSettingsHeaderCustom4Name
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM5_ENABLE: {{ .Values.base.picserverSettingsHeaderCustom5Enable
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM5_NAME: {{ .Values.base.picserverSettingsHeaderCustom5Name
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM6_ENABLE: {{ .Values.base.picserverSettingsHeaderCustom6Enable
+    | quote }}
+  PICSERVER_SETTINGS_HEADER_CUSTOM6_NAME: {{ .Values.base.picserverSettingsHeaderCustom6Name
+    | quote }}
+  PICSERVER_SETTINGS_LOG_LEVEL_NAME: {{ .Values.base.picserverSettingsLogLevelName
+    | quote }}
+  PICSERVER_SETTINGS_STDOUT: {{ .Values.base.picserverSettingsStdout | quote }}
+  PICSERVER_SETTINGS_SYSLOG: {{ .Values.base.picserverSettingsSyslog | quote }}
+  PICSERVER_STATISTICS_HEP_STATS_ENABLE: {{ .Values.base.picserverStatisticsHepStatsEnable
+    | quote }}

@@ -1,0 +1,59 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "picserver.fullname" . }}-client
+  labels:
+    k8slens-edit-resource-version: v1
+  {{- include "picserver.labels" . | nindent 4 }}
+data:
+  PICSERVER_CLICKHOUSE_DBNAME: {{ .Values.client.picserverClickhouseDbname |
+    quote }}
+  PICSERVER_CLICKHOUSE_HOST: {{ .Values.client.picserverClickhouseHost | quote
+    }}
+  PICSERVER_CLICKHOUSE_PASSWORD: {{ .Values.client.picserverClickhousePassword
+    | quote }}
+  PICSERVER_CLICKHOUSE_PORT: {{ .Values.client.picserverClickhousePort | quote
+    }}
+  PICSERVER_CLICKHOUSE_SETTINGS_DBNAME: {{ .Values.client.picserverClickhouseSettingsDbname
+    | quote }}
+  PICSERVER_CLICKHOUSE_SKIP_VERIFY: {{ .Values.client.picserverClickhouseSkipVerify
+    | quote }}
+  PICSERVER_CLICKHOUSE_SSL_ENABLE: {{ .Values.client.picserverClickhouseSslEnable
+    | quote }}
+  PICSERVER_CLICKHOUSE_USER: {{ .Values.client.picserverClickhouseUser | quote
+    }}
+  PICSERVER_DATABASE_DBLOOKUP: {{ .Values.client.picserverDatabaseDblookup |
+    quote }}
+  PICSERVER_INTERNALSTATS_CONCURRENT_CALLS: {{ .Values.client.picserverInternalstatsConcurrentCalls
+    | quote }}
+  PICSERVER_INTERNALSTATS_CONCURRENT_REGISTRATION: {{ .Values.client.picserverInternalstatsConcurrentRegistration
+    | quote }}
+  PICSERVER_INTERNALSTATS_ENABLE: {{ .Values.client.picserverInternalstatsEnable
+    | quote }}
+  PICSERVER_INTERNALSTATS_HEP_METRICES: {{ .Values.client.picserverInternalstatsHepMetrices
+    | quote }}
+  PICSERVER_INTERNALSTATS_INTERVAL: {{ .Values.client.picserverInternalstatsInterval
+    | quote }}
+  PICSERVER_TIMER_IPLOOKUP_REFRESH_INTERVAL: {{ .Values.client.picserverTimerIplookupRefreshInterval
+    | quote }}
+  PICSERVER_TRANSACTION_MULTI_FORKING: {{ .Values.client.picserverTransactionMultiForking
+    | quote }}
+  PICSERVER_TRANSACTION_RESET_FORKING: {{ .Values.client.picserverTransactionResetForking
+    | quote }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "picserver.fullname" . }}-client
+  labels:
+    app: picserver
+    picserver: picserver-client
+  {{- include "picserver.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.client.type }}
+  selector:
+    app: picserver
+    picserver: picserver-client
+  {{- include "picserver.selectorLabels" . | nindent 4 }}
+  ports:
+	{{- .Values.client.ports | toYaml | nindent 2 }}

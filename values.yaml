@@ -1,0 +1,77 @@
+base:
+  hepicappSystemSettingsLogDownloadEnable: "false"
+  picserverClickhouseMaxTls: tls1.3
+  picserverClickhouseMinTls: tls1.3
+  picserverClickhouseReconnectOnException: "true"
+  picserverClickhouseSettingsDbParam: "true"
+  picserverClickhouseSettingsMaxTls: tls1.3
+  picserverClickhouseSettingsMinTls: tls1.3
+  picserverClickhouseSettingsTcpkeepalive: "true"
+  picserverClickhouseTcpkeepalive: "true"
+  picserverCloudLicense: LICENCE_KEY
+  picserverInternalstatsConcurrentCalls: "FALSE"
+  picserverInternalstatsConcurrentRegistration: "FALSE"
+  picserverInternalstatsEnable: "FALSE"
+  picserverInternalstatsHepMetrics: "FALSE"
+  picserverInternalstatsInterval: "30"
+  picserverMosExtractJsonMos: "true"
+  picserverServerCliHost: 0.0.0.0
+  picserverServerHttpHost: 0.0.0.0
+  picserverServerTcpPort: "9062"
+  picserverSettingsDisableJsonErrorParser: "true"
+  picserverSettingsHeaderCustom1Enable: "false"
+  picserverSettingsHeaderCustom1Name: X-header-1
+  picserverSettingsHeaderCustom2Enable: "false"
+  picserverSettingsHeaderCustom2Name: X-header-2
+  picserverSettingsHeaderCustom3Enable: "false"
+  picserverSettingsHeaderCustom3Name: X-header-3
+  picserverSettingsHeaderCustom4Enable: "false"
+  picserverSettingsHeaderCustom4Name: X-header-4
+  picserverSettingsHeaderCustom5Enable: "false"
+  picserverSettingsHeaderCustom5Name: X-header-5
+  picserverSettingsHeaderCustom6Enable: "false"
+  picserverSettingsHeaderCustom6Name: X-header-6
+  picserverSettingsLogLevelName: debug
+  picserverSettingsStdout: "true"
+  picserverSettingsSyslog: "false"
+  picserverStatisticsHepStatsEnable: "TRUE"
+kubernetesClusterDomain: cluster.local
+client:
+  picserver:
+    image:
+      repository: qxip/picserver
+      tag: ASK_QXIP
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+        cpu: 250m
+        memory: 2Gi
+  picserverClickhouseDbname: DB_NAME
+  picserverClickhouseHost: clickhouse.example.com
+  picserverClickhousePassword: DB_PWD
+  picserverClickhousePort: "9440"
+  picserverClickhouseSettingsDbname: DB_NAME
+  picserverClickhouseSkipVerify: "true"
+  picserverClickhouseSslEnable: "true"
+  picserverClickhouseUser: DB_NAME
+  picserverDatabaseDblookup: DB_NAME
+  picserverInternalstatsConcurrentCalls: "FALSE"
+  picserverInternalstatsConcurrentRegistration: "FALSE"
+  picserverInternalstatsEnable: "FALSE"
+  picserverInternalstatsHepMetrices: "FALSE"
+  picserverInternalstatsInterval: "30"
+  picserverTimerIplookupRefreshInterval: "60"
+  picserverTransactionMultiForking: "true"
+  picserverTransactionResetForking: "true"
+  ports:
+  - name: tcp
+    port: 9062
+    protocol: TCP
+    targetPort: 9062
+  - name: http
+    port: 9099
+    protocol: TCP
+    targetPort: 9099
+  replicas: 1
+  revisionHistoryLimit: 10
+  type: ClusterIP

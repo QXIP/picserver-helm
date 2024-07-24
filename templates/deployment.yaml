@@ -1,0 +1,61 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "picserver.fullname" . }}-client
+  labels:
+    app: picserver
+    k8slens-edit-resource-version: v1
+    picserver: picserver-client
+    picserver_version: {{ .Values.client.picserver.image.tag }}
+  {{- include "picserver.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml . | nindent 8 }}
+  {{- end }}
+spec:
+  replicas: {{ .Values.client.replicas }}
+  revisionHistoryLimit: {{ .Values.client.revisionHistoryLimit }}
+  selector:
+    matchLabels:
+      app: picserver
+      picserver: picserver-client
+    {{- include "picserver.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: picserver
+        customer_organization: Smartnumbers
+        customer_project: Production
+        picserver: picserver-client
+      {{- include "picserver.selectorLabels" . | nindent 8 }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        envFrom:
+        - configMapRef:
+            name: {{ include "picserver.fullname" . }}-base
+        - configMapRef:
+            name: {{ include "picserver.fullname" . }}-client
+        image: {{ .Values.client.picserver.image.repository }}:{{ .Values.client.picserver.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.client.picserver.imagePullPolicy }}
+        name: picserver
+        ports:
+          {{- range .Values.client.ports }}
+          - containerPort: {{ .port }}
+            protocol: {{ .protocol }}
+          {{- end }}
+        resources: {{- toYaml .Values.client.picserver.resources | nindent 10 }}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      imagePullSecrets:
+      - name: qryn-dckr
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
